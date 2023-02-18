@@ -26,7 +26,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 <header class="w3-display-container w3-content" style="max-width:1500px;">
   <img class="w3-image" src={% static 'images/topimage.png' %} alt="The Hotel" style="min-width:900px" width="1500" height="700">
   <div class="w3-display-left w3-padding w3-col l6 m8">
-    <div class="w3-container w3-red">
+   <!-- commented the booking section on home page --!>
+   <!-- <div class="w3-container w3-red">
       <h2><i class="fa fa-bed w3-margin-right"></i>Book Your Adventure</h2>
     </div>
     <div class="w3-container w3-white w3-padding-16">
@@ -50,7 +51,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
         </div>
         <button class="w3-button w3-dark-grey" type="submit"><i class="fa fa-search w3-margin-right"></i> Search availability</button>
       </form>
-    </div>
+    </div> --!>
+
+
+
   </div>
 </header>
 
@@ -58,7 +62,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 <div class="w3-content" style="max-width:1532px;">
 
   <div class="w3-container w3-margin-top" id="rooms">
-    <h3>Adventures</h3>
+    <h3>Book Your Adventure Here</h3>
     <p>Life is a Beautiful Adventure</p>
   </div>
 
@@ -77,8 +81,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <input class="w3-input w3-border" type="number" placeholder="0">
     </div>
     <div class="w3-col m2">
-      <label><i class="fa fa-search"></i> Search</label>
-      <button class="w3-button w3-block w3-black">Search</button>
+      <label><i class="fa fa-search"></i> Book</label>
+      <button class="w3-button w3-block w3-black">Book Now</button>
     </div>
   </div>
 
@@ -118,6 +122,33 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
             Climb, crawl, and swing your way through
             a series of obstacles, and see if you have
             what it takes to complete the course.</h6>
+        <button class="w3-button w3-block w3-black w3-margin-bottom">More Info</button>
+      </div>
+    </div>
+  </div>
+  <div class="w3-third w3-margin-bottom">
+      <img src={% static 'images/lilClimber.png' %} alt="Norway" style="width:100%">
+      <div class="w3-container w3-white">
+        <h3>Lil Climbers</h3>
+        <h6 class="w3-opacity">Bring the little ones along for the fun! Our Lil’ Climbers area is designed specifically for kids, with age-appropriate obstacles and climbing structures that are safe and fun. It's the perfect place for kids to burn off some energy and develop their motor skills.</h6>
+        <button class="w3-button w3-block w3-black w3-margin-bottom">More Info</button>
+      </div>
+    </div>
+  </div>
+  <div class="w3-third w3-margin-bottom">
+      <img src={% static 'images/arcade.png' %} alt="Norway" style="width:100%">
+      <div class="w3-container w3-white">
+        <h3>Arcade</h3>
+        <h6 class="w3-opacity">Step inside our vibrant and exciting Arcade and get ready for some fun! With a wide selection of classic and modern games, you're sure to find something you love. From fast-paced racing games to challenging puzzle games, there's something for everyone.</h6>
+        <button class="w3-button w3-block w3-black w3-margin-bottom">More Info</button>
+      </div>
+    </div>
+  </div>
+  <div class="w3-third w3-margin-bottom">
+      <img src={% static 'images/virtualreality.png.png' %} alt="Norway" style="width:100%">
+      <div class="w3-container w3-white">
+        <h3>Virtual Reality</h3>
+        <h6 class="w3-opacity">Step into a whole new world with our cutting-edge Virtual Reality experiences. Whether you want to explore far-off lands, face your fears, or play epic games, our VR experiences are like nothing you've ever experienced before.</h6>
         <button class="w3-button w3-block w3-black w3-margin-bottom">More Info</button>
       </div>
     </div>
