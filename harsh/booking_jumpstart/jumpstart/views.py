@@ -12,14 +12,24 @@ class Login(View):
     def get(self, request):
         user_session = LoginForm()
         context = {'form': user_session}
-        return render(request, 'jumpstart/login2.html', context)
+        return render(request, 'jumpstart/login.html', context)
 
     def post(self, request):
+        print('hoho')
         form = LoginForm(request.POST)
         if form.is_valid():
             user = authenticate(email=form.cleaned_data['email'], password=form.cleaned_data['password'])
             if user is None:
+                print('hehe')
                 messages.error(request, "Incorrect username or password")
                 return render(request, 'jumpstart/login.html', {'form': form})
-        return render(request, 'jumpstart/login.html', {'form': form, 'user': user})
+            return render(request, 'jumpstart/welcome.html', {'form': form, 'user': user})
+
+
+class Welcome(View):
+    def get(self, request):
+        return render(request, 'jumpstart/welcome.html')
+
+    def post(self, request):
+        return render(request, 'jumpstart/welcome.html')
 
