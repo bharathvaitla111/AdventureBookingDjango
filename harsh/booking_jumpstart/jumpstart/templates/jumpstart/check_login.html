@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{%  load static %}
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+        <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script class="u-script" type="text/javascript" src="{% static 'jquery.js' %}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{% static 'nicepage.js' %}" defer=""></script>
+    <link rel="stylesheet" href="{% static 'nicepage.css' %}" media="screen">
+    <title>Title</title>
+    <link id="u-theme-google-font" rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+        <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "",
+		"logo": "{% static 'images/attachment_722568201.jpeg' %}",
+		"sameAs": []
+}</script>
+</head>
+<body>
+    <link rel="stylesheet" href="{% static 'login_test.css' %}" media="screen">
+<header class="u-black u-clearfix u-header u-header" id="sec-5e60">
+    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+        <a href="login_test.html" class="u-hover-feature u-image u-logo u-image-1" data-image-width="229"
+           data-image-height="61" title="login_test">
+            <img src="{% static 'images/attachment_722568201.jpeg' %}" class="u-logo-image u-logo-image-1">
+        </a>
+    </div>
+</header>
+<section class="u-align-center u-clearfix u-image u-parallax u-shading u-section-1" id="sec-cae4" data-animation-name=""
+         data-animation-duration="0" data-animation-delay="0" data-animation-direction="" data-image-width="1280"
+         data-image-height="841">
+    <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-form u-form-1">
+<form action="" method="post">{% csrf_token %}
+<div class="u-form-email u-form-group u-label-top u-form-group-1">
+                    <label for="{{ form.email.id_for_label }}" class="u-label u-text-white u-label-1">Email</label>
+                    {{ form.email }}
+                </div>
+                <div class="u-form-group u-label-top u-form-group-2">
+                    <label for="{{ form.password.id_for_label }}" class="u-label u-text-white u-label-2">Password</label>
+                    {{ form.password }}
+                </div>
+                <div class="u-align-left u-form-group u-form-submit u-label-top">
+                    <input type="submit" value="submit" class="u-form-control-hidden">
+                    <a href="#"
+                       class="u-active-palette-2-light-1 u-border-none u-btn u-btn-round u-btn-submit u-button-style u-hover-palette-1-light-3 u-palette-3-light-3 u-radius-41 u-text-active-black u-text-black u-text-hover-palette-1-dark-1 u-btn-1">Submit</a>
+                                </div>
+                <p class="u-align-left u-form-group u-form-text u-hover-feature u-text u-text-1">
+                    <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-3-light-3 u-btn-2"
+                       href="{% url 'forgot_password' %}">Forgot / Reset Password &gt;&gt;&gt;</a>
+                </p>
+{% if messages %}
+{% for message in messages %}
+    <div class="u-form-send-message u-form-send-success">{{ message|safe }}</div>
+{% endfor %}
+{% endif %}
+</form>
+        </div>
+    </div>
+</section>
+</body>
+</html>
