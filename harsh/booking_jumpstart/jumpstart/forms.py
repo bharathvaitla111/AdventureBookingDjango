@@ -19,3 +19,20 @@ class LoginForm(ModelForm):
                 'placeholder': 'Enter your password'
             })
         }
+
+
+class RegistrationForm(ModelForm):
+    class Meta:
+        model = Customer
+        fields = ['email', 'password']
+        widgets = {
+            # telling Django your password field in the mode is a password input on the template
+            'email': EmailInput(attrs={
+                'class': "form-control",
+                'placeholder': 'Enter a valid email address',
+            }),
+            'password': PasswordInput(attrs={
+                'class': "form-control",
+                'placeholder': 'Enter your password'
+            })
+        }
