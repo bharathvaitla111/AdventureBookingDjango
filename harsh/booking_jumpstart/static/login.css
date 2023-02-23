@@ -4,6 +4,10 @@
 	padding: 0;
 }
 
+a{
+	text-decoration: none;
+}
+
 body {
 	background: #ffc185;
 }
@@ -51,6 +55,14 @@ p > span {
 	display: block;
 	font-weight: 400;
 	font-size: 9px;
+}
+
+p.forgot {
+	color: #f3bfa0;font-weight: bold;text-transform: lowercase;font-size: 15px;
+}
+
+p.forgot:hover {
+	color: #fa630d;
 }
 
 h3 {
