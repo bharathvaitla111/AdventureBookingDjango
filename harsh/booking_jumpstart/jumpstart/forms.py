@@ -1,7 +1,7 @@
+from django.core.exceptions import ValidationError
 from django.forms import ModelForm, TextInput, EmailInput, PasswordInput
 from .models import Customer
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 
 
 class LoginForm(ModelForm):
@@ -35,10 +35,6 @@ class RegistrationForm(UserCreationForm):
             'email': EmailInput(attrs={
                 'placeholder': 'enter your email',
             }),
-            'password1': PasswordInput(attrs={
-                'placeholder': 'enter your password',
-                'required': True
-            }),
         }
 
     def __init__(self, *args, **kwargs):
@@ -64,5 +60,21 @@ class RegistrationForm(UserCreationForm):
         new_customer.save()
 
 
+class Forgot(UserCreationForm):
+    class Meta:
+        model = Customer
+        fields = ['email', 'password1', 'password2']
+        widgets = {
+            # telling Django your password field in the mode is a password input on the template
+            'email': EmailInput(attrs={
+                'placeholder': 'enter a valid email',
+            })
+        }
+    def __init__(self, *args, **kwargs):
+        super(Forgot, self).__init__(*args, **kwargs)
+        self.fields['password1'].widget = PasswordInput(
+            attrs={'placeholder': 'enter your password'})
+        self.fields['password2'].widget = PasswordInput(
+            attrs={'placeholder': 're-enter your password'})
 
-
+        # self.fields['email'].help_text = None

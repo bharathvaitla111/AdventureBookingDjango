@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth import authenticate
-from .forms import LoginForm, RegistrationForm
+from .forms import LoginForm, RegistrationForm, Forgot
 
 # Create your views here.
 
@@ -42,4 +42,31 @@ class Welcome(View):
 
     def post(self, request):
         return render(request, 'jumpstart/welcome.html')
+
+
+class ForgotPassword(View):
+    def get(self, request):
+        user_forgot = Forgot()
+        reset = None
+        context = {'form': user_forgot, 'reset': reset}
+        return render(request, 'jumpstart/forgot_password.html', context)
+
+    def post(self, request):
+        form = Forgot(request.POST)
+        reset = Forgot(request.POST)
+        print(reset)
+        reset = None
+        if form.is_valid():
+            pass
+        elif reset is None:
+            user = authenticate(email=form.cleaned_data['email'])
+            if user is None:
+                messages.error(request, "Incorrect email")
+                return render(request, 'jumpstart/forgot_password.html', {'form': form, 'reset': reset})
+            else:
+                reset = Forgot()
+                reset.initial['email'] = form.cleaned_data['email']
+                messages.success(request, "proceed to reset")
+                return render(request, 'jumpstart/forgot_password.html', {'reset': reset})
+        # return render(request, 'jumpstart/forgot_password.html', {'form': form, 'reset': reset})
 
