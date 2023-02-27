@@ -1,4 +1,3 @@
-from django.core.exceptions import ValidationError
 from django.forms import ModelForm, TextInput, EmailInput, PasswordInput
 from .models import Customer
 from django.contrib.auth.forms import UserCreationForm
@@ -78,3 +77,6 @@ class Forgot(UserCreationForm):
             attrs={'placeholder': 're-enter your password'})
 
         # self.fields['email'].help_text = None
+
+    def clean(self):
+        pass
