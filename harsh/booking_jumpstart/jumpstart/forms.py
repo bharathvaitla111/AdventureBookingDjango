@@ -1,5 +1,7 @@
-from django.forms import ModelForm, TextInput, EmailInput, PasswordInput
-from .models import Customer
+from django.forms import ModelForm, TextInput, EmailInput, PasswordInput, forms
+from .models import Customer, Booking
+from django import forms
+
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -81,3 +83,26 @@ class Forgot(UserCreationForm):
 
     def clean(self):
         pass
+
+
+class BookingForm(ModelForm):
+    class Meta:
+        model = Booking
+        fields = [
+            'customer',
+            'bookingDate',
+            'reserveDate',
+            'address',
+            'phoneNumber',
+            'adultTicketCount',
+            'ChildTicketCount',
+            'FastTrackAdultTicketCount',
+            'FastTrackChildTicketCount',
+            'SeniorCitizenTicketCount',
+            'AdultCollegeIdOfferTicketCount',
+            'totalPrice',
+        ]
+        widgets = {
+            'bookingDate': forms.DateInput(attrs={'type': 'date'}),
+            'reserveDate': forms.DateInput(attrs={'type': 'date'}),
+        }
