@@ -1,6 +1,7 @@
 from django.forms import ModelForm, TextInput, EmailInput, PasswordInput, forms
 from .models import Customer, Booking
 from django import forms
+from django.contrib.auth.hashers import make_password
 
 from django.contrib.auth.forms import UserCreationForm
 
@@ -49,14 +50,13 @@ class RegistrationForm(UserCreationForm):
             self.fields[fieldname].help_text = None
 
     def save(self, commit=True):
-        print('hey here')
         username = self.cleaned_data['first_name'] + '_' + self.cleaned_data['last_name']
         new_customer = Customer(
             username=username,
             first_name=self.cleaned_data['first_name'],
             last_name=self.cleaned_data['last_name'],
             email=self.cleaned_data['email'],
-            password=self.cleaned_data['password1']
+            password=make_password(self.cleaned_data['password1'])
         )
         new_customer.save()
 
