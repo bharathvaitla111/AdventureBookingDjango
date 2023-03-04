@@ -30,7 +30,13 @@ class LoginSignup(View):
             user_signup.save()
             form.email = user_signup.cleaned_data['email']
             return render(request, 'jumpstart/login.html', {'form': form})
-
+        else:
+            messages.error(request, "Please enter a Strong password")
+            user_signup.first_name = user_signup.cleaned_data['first_name']
+            user_signup.last_name = user_signup.cleaned_data['last_name']
+            user_signup.email = user_signup.cleaned_data['email']
+            context = {'form': LoginForm(), 'signup': user_signup}
+            return render(request, 'jumpstart/login.html', context)
 
 class Welcome(View):
     def get(self, request):
