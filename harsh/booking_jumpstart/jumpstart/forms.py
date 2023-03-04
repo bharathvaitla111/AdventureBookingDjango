@@ -48,7 +48,7 @@ class RegistrationForm(UserCreationForm):
 
     def save(self, commit=True):
         print('hey here')
-        username = self.cleaned_data['first_name']+'_'+self.cleaned_data['last_name']
+        username = self.cleaned_data['first_name'] + '_' + self.cleaned_data['last_name']
         new_customer = Customer(
             username=username,
             first_name=self.cleaned_data['first_name'],
@@ -69,6 +69,7 @@ class Forgot(UserCreationForm):
                 'placeholder': 'enter a valid email',
             })
         }
+
     def __init__(self, *args, **kwargs):
         super(Forgot, self).__init__(*args, **kwargs)
         self.fields['password1'].widget = PasswordInput(
@@ -80,6 +81,3 @@ class Forgot(UserCreationForm):
 
     def clean(self):
         pass
-
-
-
