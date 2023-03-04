@@ -1,10 +1,11 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth import authenticate
-from .forms import LoginForm, RegistrationForm, Forgot
+from .forms import LoginForm, RegistrationForm, Forgot, BookingForm
+
 
 # Create your views here.
 
@@ -40,7 +41,7 @@ class LoginSignup(View):
 
 class Welcome(View):
     def get(self, request):
-        return render(request, 'jumpstart/welcome.html')
+        return render(request, 'jumpstart/homepage.html')
 
 
 class ForgotPassword(View):
@@ -70,3 +71,18 @@ class ForgotPassword(View):
                 messages.success(request, "proceed to reset")
                 return render(request, 'jumpstart/forgot_password.html', {'reset': reset})
 
+
+class CreateBookingView(View):
+    form_class = BookingForm
+    template_name = 'jumpstart/bookingpage.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('booking_list')
+        return render(request, self.template_name, {'form': form})

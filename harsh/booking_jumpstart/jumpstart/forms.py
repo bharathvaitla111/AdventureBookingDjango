@@ -1,5 +1,7 @@
-from django.forms import ModelForm, TextInput, EmailInput, PasswordInput
-from .models import Customer
+from django.forms import ModelForm, TextInput, EmailInput, PasswordInput, forms
+from .models import Customer, Booking
+from django import forms
+
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -48,7 +50,7 @@ class RegistrationForm(UserCreationForm):
 
     def save(self, commit=True):
         print('hey here')
-        username = self.cleaned_data['first_name']+'_'+self.cleaned_data['last_name']
+        username = self.cleaned_data['first_name'] + '_' + self.cleaned_data['last_name']
         new_customer = Customer(
             username=username,
             first_name=self.cleaned_data['first_name'],
@@ -69,6 +71,7 @@ class Forgot(UserCreationForm):
                 'placeholder': 'enter a valid email',
             })
         }
+
     def __init__(self, *args, **kwargs):
         super(Forgot, self).__init__(*args, **kwargs)
         self.fields['password1'].widget = PasswordInput(
@@ -80,3 +83,26 @@ class Forgot(UserCreationForm):
 
     def clean(self):
         pass
+
+
+class BookingForm(ModelForm):
+    class Meta:
+        model = Booking
+        fields = [
+            'customer',
+            'bookingDate',
+            'reserveDate',
+            'address',
+            'phoneNumber',
+            'adultTicketCount',
+            'ChildTicketCount',
+            'FastTrackAdultTicketCount',
+            'FastTrackChildTicketCount',
+            'SeniorCitizenTicketCount',
+            'AdultCollegeIdOfferTicketCount',
+            'totalPrice',
+        ]
+        widgets = {
+            'bookingDate': forms.DateInput(attrs={'type': 'date'}),
+            'reserveDate': forms.DateInput(attrs={'type': 'date'}),
+        }
