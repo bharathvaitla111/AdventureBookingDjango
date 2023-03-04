@@ -42,7 +42,7 @@ class LoginSignup(View):
 
 class Welcome(View):
     def get(self, request):
-        return render(request, 'jumpstart/new_home.html')
+        return render(request, 'jumpstart/welcome.html')
 
 
 class ForgotPassword(View):
