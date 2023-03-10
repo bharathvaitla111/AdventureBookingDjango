@@ -1,4 +1,5 @@
-
+from allauth.account.views import email
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -6,6 +7,7 @@ from django.views import View
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from .forms import LoginForm, RegistrationForm, Forgot, BookingForm
+from .models import Booking, Customer, User
 
 
 # Create your views here.
@@ -26,7 +28,7 @@ class LoginSignup(View):
             if user is None:
                 messages.error(request, "Incorrect username or password")
                 return render(request, 'jumpstart/login.html', {'form': form})
-            return render(request, 'jumpstart/welcome.html', {'form': form, 'user': user})
+            return render(request, 'jumpstart/new_home.html', {'form': form, 'user': user})
 
         elif user_signup.is_valid():
             user_signup.save()
@@ -40,9 +42,10 @@ class LoginSignup(View):
             context = {'form': LoginForm(), 'signup': user_signup}
             return render(request, 'jumpstart/login.html', context)
 
+
 class Welcome(View):
     def get(self, request):
-        return render(request, 'jumpstart/homepage.html')
+        return render(request, 'jumpstart/new_home.html')
 
 
 class ForgotPassword(View):
@@ -81,9 +84,11 @@ class CreateBookingView(View):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
 
+    @login_required()
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('booking_list')
+            message = "booking successful"
+            return redirect('jumpstart/bookingpage.html', message)
         return render(request, self.template_name, {'form': form})

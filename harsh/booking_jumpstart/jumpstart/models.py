@@ -16,7 +16,7 @@ class Customer(User):
 
 class Booking(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    bookingDate = models.DateField()
+    bookingDate = models.DateField(auto_now=True)
     reserveDate = models.DateField()
     address = models.CharField(max_length=100)
     phoneNumber = models.CharField(max_length=20)
@@ -27,4 +27,8 @@ class Booking(models.Model):
     FastTrackChildTicketCount = models.PositiveIntegerField(default=0)
     SeniorCitizenTicketCount = models.PositiveIntegerField(default=0)
     AdultCollegeIdOfferTicketCount = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.customer.first_name} your booking is successful on {self.reserveDate}'
+
 

@@ -89,8 +89,7 @@ class BookingForm(ModelForm):
     class Meta:
         model = Booking
         fields = [
-            'customer',
-            'bookingDate',
+
             'reserveDate',
             'address',
             'phoneNumber',
@@ -103,6 +102,5 @@ class BookingForm(ModelForm):
             'totalPrice',
         ]
         widgets = {
-            'bookingDate': forms.DateInput(attrs={'type': 'date'}),
             'reserveDate': forms.DateInput(attrs={'type': 'date'}),
         }
