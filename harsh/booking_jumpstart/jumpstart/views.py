@@ -28,6 +28,7 @@ class LoginSignup(View):
             if user is None:
                 messages.error(request, "Incorrect username or password")
                 return render(request, 'jumpstart/login.html', {'form': form})
+            request.session['user_id'] = user.id
             return render(request, 'jumpstart/new_home.html', {'form': form, 'user': user})
 
         elif user_signup.is_valid():
@@ -80,15 +81,22 @@ class CreateBookingView(View):
     form_class = BookingForm
     template_name = 'jumpstart/bookingpage.html'
 
+    # @login_required()
     def get(self, request, *args, **kwargs):
+        user_id = request.session.get('user_id')
+        user = User.objects.get(id=user_id)
         form = self.form_class()
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'user': user})
 
     @login_required()
     def post(self, request, *args, **kwargs):
+        user_id = request.session.get('user_id')
+        user = User.objects.get(id=user_id)
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
             message = "booking successful"
-            return redirect('jumpstart/bookingpage.html', message)
+            print(user_id)
+            return render(request, 'jumpstart/bookingpage.html', {'user': user})
+            # return redirect('jumpstart/bookingpage.html', message, )
         return render(request, self.template_name, {'form': form})
